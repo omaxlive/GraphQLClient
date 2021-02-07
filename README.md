@@ -1,5 +1,7 @@
 # GraphQL Project
 
+`./server/`
+
 - Run dev server `npm run dev`
 
 - Find the GraphQL Playground in `http://localhost:4000/`
