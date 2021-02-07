@@ -1,3 +1,9 @@
+# GraphQL Project
+
+- Run dev server `npm run dev`
+
+- Find the GraphQL Playground in `http://localhost:4000/`
+
 ### Simple Query
 
 ```js
@@ -28,6 +34,16 @@ query getPosts($input: PostInput!) {
   getPosts(input: $input) {
     title
     detail
+  }
+}
+```
+
+Variable declararion in Playground
+
+```json
+{
+  "input": {
+    "author": "author 1"
   }
 }
 ```
