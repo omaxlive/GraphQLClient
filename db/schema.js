@@ -9,8 +9,11 @@ const typeDefs = gql`
   type Author {
     author: String
   }
+  input PostInput {
+    title: String
+  }
   type Query {
-    getPosts: [Post]
+    getPosts(input: PostInput!): [Post]
     getAuthors: [Author]
   }
 `;

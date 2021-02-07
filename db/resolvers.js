@@ -19,7 +19,10 @@ const posts = [
 // Resolvers
 const resolvers = {
   Query: {
-    getPosts: () => posts,
+    getPosts: (_, { input }, context, info) => {
+      const results = posts.filter((post) => post.title === input.title);
+      return results;
+    },
     getAuthors: () => posts,
   },
 };
