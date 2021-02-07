@@ -10,7 +10,7 @@ const typeDefs = gql`
     author: String
   }
   input PostInput {
-    title: String
+    author: String
   }
   type Query {
     getPosts(input: PostInput!): [Post]
