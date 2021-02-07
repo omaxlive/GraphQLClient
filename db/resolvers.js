@@ -20,6 +20,7 @@ const posts = [
 const resolvers = {
   Query: {
     getPosts: (_, { input }, context, info) => {
+      console.log('context: ', context);
       const results = posts.filter((post) => post.author === input.author);
       return results;
     },

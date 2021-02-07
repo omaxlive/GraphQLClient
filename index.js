@@ -5,6 +5,10 @@ const resolvers = require('./db/resolvers');
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: () => {
+    const myContext = 'context example';
+    return { myContext };
+  },
 });
 
 server.listen().then(({ url }) => {
