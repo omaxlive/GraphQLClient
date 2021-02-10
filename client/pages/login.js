@@ -1,56 +1,74 @@
 import React from "react";
 import Layout from "../layout/layout";
+import { useFormik } from "formik";
 
 export default function Login() {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      console.log("values: ", values);
+    },
+  });
+
   return (
     <div>
       <Layout>
         <h1 className="text-2xl text-white font-light text-center">Login</h1>
         {/* NOTE: from https://tailwindcomponents.com/component/login-form */}
-        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
-          <div class="mb-4">
+        <form
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col"
+          onSubmit={formik.handleSubmit}
+        >
+          <div className="mb-4">
             <label
-              class="block text-grey-darker text-sm font-bold mb-2"
-              for="username"
+              className="block text-grey-darker text-sm font-bold mb-2"
+              htmlFor="username"
             >
               Email
             </label>
             <input
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
               id="email"
               type="email"
               placeholder="Email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
             />
           </div>
-          <div class="mb-6">
+          <div className="mb-6">
             <label
-              class="block text-grey-darker text-sm font-bold mb-2"
-              for="password"
+              className="block text-grey-darker text-sm font-bold mb-2"
+              htmlFor="password"
             >
               Password
             </label>
             <input
-              class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
+              className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
               id="password"
               type="password"
               placeholder="******************"
+              value={formik.values.password}
+              onChange={formik.handleChange}
             />
-            <p class="text-red text-xs italic">Please choose a password.</p>
+            <p className="text-red text-xs italic">Please choose a password.</p>
           </div>
-          <div class="flex items-center justify-between">
+          <div className="flex items-center justify-between">
             <input
-              class="text-white bg-blue-800 hover:bg-blue-dark font-bold py-2 px-4 rounded"
+              className="text-white bg-blue-800 hover:bg-blue-dark font-bold py-2 px-4 rounded"
               type="submit"
               value="Sign in"
             />
             <a
-              class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker"
+              className="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker"
               href="#"
             >
               Forgot Password?
             </a>
           </div>
-        </div>
+        </form>
       </Layout>
     </div>
   );
