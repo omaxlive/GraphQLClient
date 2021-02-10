@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../layout/layout";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 
 export default function Signup() {
   const formik = useFormik({
@@ -10,6 +11,16 @@ export default function Signup() {
       email: "",
       password: "",
     },
+    validationSchema: Yup.object({
+      name: Yup.string().required("Name is mandatory"),
+      lastname: Yup.string().required("Lastname is mandatory"),
+      email: Yup.string()
+        .email("Email format not valid")
+        .required("Email is mandatory"),
+      password: Yup.string()
+        .required("Password is mandatory")
+        .min(6, "The password must contain at least 6 characters "),
+    }),
     onSubmit: (values) => {
       console.log("values: ", values);
     },
@@ -38,8 +49,15 @@ export default function Signup() {
               placeholder="Name"
               value={formik.values.name}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
           </div>
+          {formik.touched.name && formik.errors.name ? (
+            <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+              <p className="font-bold">Error</p>
+              <p className="font-bold">{formik.errors.name}</p>
+            </div>
+          ) : null}
           <label
             className="block text-grey-darker text-sm font-bold mb-2"
             htmlFor="lastname"
@@ -53,7 +71,14 @@ export default function Signup() {
             placeholder="Last name"
             value={formik.values.lastname}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
+          {formik.touched.lastname && formik.errors.lastname ? (
+            <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+              <p className="font-bold">Error</p>
+              <p className="font-bold">{formik.errors.lastname}</p>
+            </div>
+          ) : null}
           <label
             className="block text-grey-darker text-sm font-bold mb-2"
             htmlFor="email"
@@ -67,7 +92,14 @@ export default function Signup() {
             placeholder="Email"
             value={formik.values.email}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
+          {formik.touched.email && formik.errors.email ? (
+            <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+              <p className="font-bold">Error</p>
+              <p className="font-bold">{formik.errors.email}</p>
+            </div>
+          ) : null}
           <label
             className="block text-grey-darker text-sm font-bold mb-2"
             htmlFor="password"
@@ -81,7 +113,14 @@ export default function Signup() {
             placeholder="******************"
             value={formik.values.password}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
+          {formik.touched.password && formik.errors.password ? (
+            <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+              <p className="font-bold">Error</p>
+              <p className="font-bold">{formik.errors.password}</p>
+            </div>
+          ) : null}
           <p className="text-red text-xs italic">Please choose a password.</p>
           <div className="flex items-center justify-between mt-3">
             <input

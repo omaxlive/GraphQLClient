@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../layout/layout";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 
 export default function Login() {
   const formik = useFormik({
@@ -8,6 +9,14 @@ export default function Login() {
       email: "",
       password: "",
     },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Email format not valid")
+        .required("Email is mandatory"),
+      password: Yup.string()
+        .required("Password is mandatory")
+        .min(6, "The password must contain at least 6 characters "),
+    }),
     onSubmit: (values) => {
       console.log("values: ", values);
     },
@@ -36,7 +45,14 @@ export default function Login() {
               placeholder="Email"
               value={formik.values.email}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+            {formik.touched.email && formik.errors.email ? (
+              <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+                <p className="font-bold">Error</p>
+                <p className="font-bold">{formik.errors.email}</p>
+              </div>
+            ) : null}
           </div>
           <div className="mb-6">
             <label
@@ -52,7 +68,14 @@ export default function Login() {
               placeholder="******************"
               value={formik.values.password}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+            {formik.touched.password && formik.errors.password ? (
+              <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+                <p className="font-bold">Error</p>
+                <p className="font-bold">{formik.errors.password}</p>
+              </div>
+            ) : null}
             <p className="text-red text-xs italic">Please choose a password.</p>
           </div>
           <div className="flex items-center justify-between">
