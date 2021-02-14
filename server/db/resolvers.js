@@ -15,6 +15,7 @@ const posts = [
     author: 'author 3',
   },
 ];
+const User = require('../models/users');
 
 // Resolvers
 const resolvers = {
@@ -25,6 +26,23 @@ const resolvers = {
       return results;
     },
     getAuthors: () => posts,
+  },
+  Mutation: {
+    newUser: async (_, { input }) => {
+      const { email } = input;
+      const userExists = await User.findOne({ email });
+      if (userExists) {
+        throw new Error('User exists');
+      }
+
+      try {
+        const user = new User(input);
+        user.save();
+        return user;
+      } catch (error) {
+        console.log('ERROR:', error);
+      }
+    },
   },
 };
 
