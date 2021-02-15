@@ -2,18 +2,31 @@ import React from "react";
 import Layout from "../layout/layout";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useMutation, gql } from "@apollo/client";
 
 export default function Signup() {
+  const NEW_ACCOUNT = gql`
+    mutation newUser($input: UserInput!) {
+      newUser(input: $input) {
+        name
+        lastName
+        email
+        created
+      }
+    }
+  `;
+  const [newUser] = useMutation(NEW_ACCOUNT);
+
   const formik = useFormik({
     initialValues: {
       name: "",
-      lastname: "",
+      lastName: "",
       email: "",
       password: "",
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Name is mandatory"),
-      lastname: Yup.string().required("Lastname is mandatory"),
+      lastName: Yup.string().required("Lastname is mandatory"),
       email: Yup.string()
         .email("Email format not valid")
         .required("Email is mandatory"),
@@ -21,8 +34,14 @@ export default function Signup() {
         .required("Password is mandatory")
         .min(6, "The password must contain at least 6 characters "),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log("values: ", values);
+      try {
+        const { data } = await newUser({ variables: { input: values } });
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 
@@ -60,23 +79,23 @@ export default function Signup() {
           ) : null}
           <label
             className="block text-grey-darker text-sm font-bold mb-2"
-            htmlFor="lastname"
+            htmlFor="lastName"
           >
             Last name
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
-            id="lastname"
+            id="lastName"
             type="text"
             placeholder="Last name"
-            value={formik.values.lastname}
+            value={formik.values.lastName}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.lastname && formik.errors.lastname ? (
+          {formik.touched.lastName && formik.errors.lastName ? (
             <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
               <p className="font-bold">Error</p>
-              <p className="font-bold">{formik.errors.lastname}</p>
+              <p className="font-bold">{formik.errors.lastName}</p>
             </div>
           ) : null}
           <label
