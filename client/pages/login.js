@@ -28,10 +28,10 @@ export default function Login() {
         <h1 className="text-2xl text-white font-light text-center">Login</h1>
         {/* NOTE: from https://tailwindcomponents.com/component/login-form */}
         <form
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col"
+          className="bg-white shadow-md rounded py-2 px-3 w-full my-3 max-w-md mx-auto"
           onSubmit={formik.handleSubmit}
         >
-          <div className="mb-4">
+          <div className="mb-4 p-2">
             <label
               className="block text-grey-darker text-sm font-bold mb-2"
               htmlFor="username"
@@ -54,7 +54,7 @@ export default function Login() {
               </div>
             ) : null}
           </div>
-          <div className="mb-6">
+          <div className="mb-6 p-2">
             <label
               className="block text-grey-darker text-sm font-bold mb-2"
               htmlFor="password"
@@ -78,7 +78,7 @@ export default function Login() {
             ) : null}
             <p className="text-red text-xs italic">Please choose a password.</p>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between p-2">
             <input
               className="text-white bg-blue-800 hover:bg-blue-dark font-bold py-2 px-4 rounded"
               type="submit"

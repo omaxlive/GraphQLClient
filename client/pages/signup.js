@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../layout/layout";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation, gql } from "@apollo/client";
+import { useRouter } from "next/router";
 
 export default function Signup() {
   const NEW_ACCOUNT = gql`
@@ -16,6 +17,10 @@ export default function Signup() {
     }
   `;
   const [newUser] = useMutation(NEW_ACCOUNT);
+
+  const [message, saveMessage] = useState(null);
+
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -38,20 +43,30 @@ export default function Signup() {
       console.log("values: ", values);
       try {
         const { data } = await newUser({ variables: { input: values } });
-        console.log(data);
+        saveMessage("Created successfully");
+        router.push("/login");
       } catch (error) {
-        console.log(error);
+        saveMessage(error.message);
       }
     },
   });
 
+  const showMessage = () => {
+    return (
+      <div className="bg-white rounded py-2 px-3 w-full my-3 max-w-md text-center mx-auto">
+        <p>{message}</p>
+      </div>
+    );
+  };
+
   return (
-    <div>
+    <>
       <Layout>
+        {message && showMessage()}
         <h1 className="text-2xl text-white font-light text-center">Signup</h1>
         {/* NOTE: from https://tailwindcomponents.com/component/login-form */}
         <form
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col"
+          className="bg-white shadow-md rounded py-2 px-3 w-full my-3 max-w-md mx-auto"
           onSubmit={formik.handleSubmit}
         >
           <div className="mb-4">
@@ -150,6 +165,6 @@ export default function Signup() {
           </div>
         </form>
       </Layout>
-    </div>
+    </>
   );
 }
