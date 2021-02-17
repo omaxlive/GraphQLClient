@@ -1,7 +1,7 @@
-import React from "react";
-import Layout from "../layout/layout";
+import { FC } from 'react';
+import { Layout } from '../layout/layout';
 
-const Posts = () => {
+const Posts: FC = () => {
   return (
     <div>
       <Layout>
@@ -11,4 +11,5 @@ const Posts = () => {
   );
 };
 
+// eslint-disable-next-line import/no-default-export
 export default Posts;

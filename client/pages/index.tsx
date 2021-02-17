@@ -1,8 +1,9 @@
 // import Head from "next/head";
-import Layout from "../layout/layout";
+import { FC } from 'react';
+import { Layout } from '../layout/layout';
 // import styles from "../styles/Home.module.css";
 
-export default function Home() {
+const Home: FC = () => {
   return (
     <Layout>
       <h1 className="text-2xl text-gray-800 font-light">Home (index)</h1>
@@ -66,4 +67,7 @@ export default function Home() {
     //   </footer>
     // </div>
   );
-}
+};
+
+// eslint-disable-next-line import/no-default-export
+export default Home;

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import Layout from "../layout/layout";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { gql, useMutation } from "@apollo/client";
-import { useRouter } from "next/router";
+import { FC, useState } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { gql, useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
+import { Layout } from '../layout/layout';
 
 const AUTH_USER = gql`
   mutation authUser($input: AuthUserInput!) {
@@ -13,36 +13,34 @@ const AUTH_USER = gql`
   }
 `;
 
-export default function Login() {
+const Login: FC = () => {
   const [message, saveMessage] = useState(null);
   const [authUser] = useMutation(AUTH_USER);
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     validationSchema: Yup.object({
-      email: Yup.string()
-        .email("Email format not valid")
-        .required("Email is mandatory"),
+      email: Yup.string().email('Email format not valid').required('Email is mandatory'),
       password: Yup.string()
-        .required("Password is mandatory")
-        .min(6, "The password must contain at least 6 characters "),
+        .required('Password is mandatory')
+        .min(6, 'The password must contain at least 6 characters '),
     }),
     onSubmit: async (values) => {
-      console.log("values: ", values);
-      saveMessage("Signing in...");
+      console.log('values: ', values);
+      saveMessage('Signing in...');
 
       try {
         const { data } = await authUser({ variables: { input: values } });
-        console.log("Success: ", data);
+        console.log('Success: ', data);
         const { token } = data.authUser;
-        localStorage.setItem("token", token);
-        router.push("/");
+        localStorage.setItem('token', token);
+        router.push('/');
       } catch (error) {
         saveMessage(error.message);
-        console.log("Error: ", error);
+        console.log('Error: ', error);
       }
     },
   });
@@ -65,10 +63,7 @@ export default function Login() {
           onSubmit={formik.handleSubmit}
         >
           <div className="mb-4 p-2">
-            <label
-              className="block text-grey-darker text-sm font-bold mb-2"
-              htmlFor="username"
-            >
+            <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
               Email
             </label>
             <input
@@ -88,10 +83,7 @@ export default function Login() {
             ) : null}
           </div>
           <div className="mb-6 p-2">
-            <label
-              className="block text-grey-darker text-sm font-bold mb-2"
-              htmlFor="password"
-            >
+            <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="password">
               Password
             </label>
             <input
@@ -116,10 +108,7 @@ export default function Login() {
               type="submit"
               value="Sign in"
             />
-            <a
-              className="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker"
-              href="#"
-            >
+            <a className="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker" href="/">
               Forgot Password?
             </a>
           </div>
@@ -127,4 +116,7 @@ export default function Login() {
       </Layout>
     </div>
   );
-}
+};
+
+// eslint-disable-next-line import/no-default-export
+export default Login;

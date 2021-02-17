@@ -1,8 +1,8 @@
 // NOTE: rfc
-import React from "react";
-import Layout from "../layout/layout";
+import { FC } from 'react';
+import { Layout } from '../layout/layout';
 
-export default function AboutUs() {
+const AboutUs: FC = () => {
   return (
     <div>
       <Layout>
@@ -10,4 +10,7 @@ export default function AboutUs() {
       </Layout>
     </div>
   );
-}
+};
+
+// eslint-disable-next-line import/no-default-export
+export default AboutUs;

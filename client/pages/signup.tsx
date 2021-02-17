@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import Layout from "../layout/layout";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { useMutation, gql } from "@apollo/client";
-import { useRouter } from "next/router";
+import { useFormik } from 'formik';
+import { useMutation, gql } from '@apollo/client';
+import { useRouter } from 'next/router';
+import * as Yup from 'yup';
+import { FC, useState } from 'react';
+import { Layout } from '../layout/layout';
 
-export default function Signup() {
+const Signup: FC = () => {
   const NEW_ACCOUNT = gql`
     mutation newUser($input: UserInput!) {
       newUser(input: $input) {
@@ -24,27 +24,26 @@ export default function Signup() {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      lastName: "",
-      email: "",
-      password: "",
+      name: '',
+      lastName: '',
+      email: '',
+      password: '',
     },
     validationSchema: Yup.object({
-      name: Yup.string().required("Name is mandatory"),
-      lastName: Yup.string().required("Lastname is mandatory"),
-      email: Yup.string()
-        .email("Email format not valid")
-        .required("Email is mandatory"),
+      name: Yup.string().required('Name is mandatory'),
+      lastName: Yup.string().required('Lastname is mandatory'),
+      email: Yup.string().email('Email format not valid').required('Email is mandatory'),
       password: Yup.string()
-        .required("Password is mandatory")
-        .min(6, "The password must contain at least 6 characters "),
+        .required('Password is mandatory')
+        .min(6, 'The password must contain at least 6 characters '),
     }),
     onSubmit: async (values) => {
-      console.log("values: ", values);
+      console.log('values: ', values);
       try {
         const { data } = await newUser({ variables: { input: values } });
-        saveMessage("Created successfully");
-        router.push("/login");
+        console.log('Created successfully: ', data);
+        saveMessage('Created successfully');
+        router.push('/login');
       } catch (error) {
         saveMessage(error.message);
       }
@@ -70,10 +69,7 @@ export default function Signup() {
           onSubmit={formik.handleSubmit}
         >
           <div className="mb-4">
-            <label
-              className="block text-grey-darker text-sm font-bold mb-2"
-              htmlFor="name"
-            >
+            <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="name">
               Name
             </label>
             <input
@@ -92,10 +88,7 @@ export default function Signup() {
               <p className="font-bold">{formik.errors.name}</p>
             </div>
           ) : null}
-          <label
-            className="block text-grey-darker text-sm font-bold mb-2"
-            htmlFor="lastName"
-          >
+          <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="lastName">
             Last name
           </label>
           <input
@@ -113,10 +106,7 @@ export default function Signup() {
               <p className="font-bold">{formik.errors.lastName}</p>
             </div>
           ) : null}
-          <label
-            className="block text-grey-darker text-sm font-bold mb-2"
-            htmlFor="email"
-          >
+          <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="email">
             Email
           </label>
           <input
@@ -134,10 +124,7 @@ export default function Signup() {
               <p className="font-bold">{formik.errors.email}</p>
             </div>
           ) : null}
-          <label
-            className="block text-grey-darker text-sm font-bold mb-2"
-            htmlFor="password"
-          >
+          <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="password">
             Password
           </label>
           <input
@@ -167,4 +154,7 @@ export default function Signup() {
       </Layout>
     </>
   );
-}
+};
+
+// eslint-disable-next-line import/no-default-export
+export default Signup;
