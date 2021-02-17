@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../layout/layout";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { gql, useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
+
+const AUTH_USER = gql`
+  mutation authUser($input: AuthUserInput!) {
+    authUser(input: $input) {
+      token
+    }
+  }
+`;
 
 export default function Login() {
+  const [message, saveMessage] = useState(null);
+  const [authUser] = useMutation(AUTH_USER);
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -17,16 +30,36 @@ export default function Login() {
         .required("Password is mandatory")
         .min(6, "The password must contain at least 6 characters "),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log("values: ", values);
+      saveMessage("Signing in...");
+
+      try {
+        const { data } = await authUser({ variables: { input: values } });
+        console.log("Success: ", data);
+        const { token } = data.authUser;
+        localStorage.setItem("token", token);
+        router.push("/");
+      } catch (error) {
+        saveMessage(error.message);
+        console.log("Error: ", error);
+      }
     },
   });
+
+  const showMessage = () => {
+    return (
+      <div className="bg-white rounded py-2 px-3 w-full my-3 max-w-md text-center mx-auto">
+        <p>{message}</p>
+      </div>
+    );
+  };
 
   return (
     <div>
       <Layout>
+        {message && showMessage()}
         <h1 className="text-2xl text-white font-light text-center">Login</h1>
-        {/* NOTE: from https://tailwindcomponents.com/component/login-form */}
         <form
           className="bg-white shadow-md rounded py-2 px-3 w-full my-3 max-w-md mx-auto"
           onSubmit={formik.handleSubmit}
@@ -76,7 +109,6 @@ export default function Login() {
                 <p className="font-bold">{formik.errors.password}</p>
               </div>
             ) : null}
-            <p className="text-red text-xs italic">Please choose a password.</p>
           </div>
           <div className="flex items-center justify-between p-2">
             <input
