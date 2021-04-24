@@ -1,4 +1,4 @@
-# Server
+# GraphQL Project examples
 
 ## Auth User
 
