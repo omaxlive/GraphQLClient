@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { Header } from '../components/Header';
 import { Menu } from './menu/menu';
 
 export const Layout: FC = ({ children }) => {
@@ -26,7 +27,10 @@ export const Layout: FC = ({ children }) => {
         <div className="bg-gray-200 min-h-screen">
           <div className="flex min-h-screen">
             <Menu />
-            <main className="bg-gray-600 sm:w-2/3 xl:w-4/5 p-5">{children}</main>
+            <main className="bg-gray-600 sm:w-2/3 xl:w-4/5 p-5">
+              <Header />
+              {children}
+            </main>
           </div>
         </div>
       )}

@@ -29,15 +29,20 @@ const Login: FC = () => {
         .min(6, 'The password must contain at least 6 characters '),
     }),
     onSubmit: async (values) => {
-      console.log('values: ', values);
       saveMessage('Signing in...');
 
       try {
         const { data } = await authUser({ variables: { input: values } });
-        console.log('Success: ', data);
-        const { token } = data.authUser;
-        localStorage.setItem('token', token);
-        router.push('/');
+        // Save token in localstorage
+        setTimeout(() => {
+          const { token } = data.authUser;
+          localStorage.setItem('token', token);
+        }, 1000);
+
+        // Redirect tp customers
+        setTimeout(() => {
+          router.push('/');
+        }, 2000);
       } catch (error) {
         saveMessage(error.message);
         console.log('Error: ', error);

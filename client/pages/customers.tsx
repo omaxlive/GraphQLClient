@@ -5,7 +5,7 @@ const Posts: FC = () => {
   return (
     <div>
       <Layout>
-        <h1 className="text-2xl text-gray-800 font-light">Customers</h1>
+        <h1 className="text-2xl text-gray-800 font-light">Posts</h1>
       </Layout>
     </div>
   );

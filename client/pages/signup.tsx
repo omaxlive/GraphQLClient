@@ -18,7 +18,7 @@ const Signup: FC = () => {
   `;
   const [newUser] = useMutation(NEW_ACCOUNT);
 
-  const [message, saveMessage] = useState(null);
+  const [message, setMessage] = useState(null);
 
   const router = useRouter();
 
@@ -42,10 +42,9 @@ const Signup: FC = () => {
       try {
         const { data } = await newUser({ variables: { input: values } });
         console.log('Created successfully: ', data);
-        saveMessage('Created successfully');
         router.push('/login');
       } catch (error) {
-        saveMessage(error.message);
+        setMessage(error.message);
       }
     },
   });
