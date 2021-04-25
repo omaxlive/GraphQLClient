@@ -5,7 +5,7 @@ import ProductSummary from './ProductSummary';
 
 const OrderSummary = () => {
   const ContextUsed = useContext(OrderContext);
-  const { products } = ContextUsed;
+  const { products } = ContextUsed as any;
 
   return (
     <>

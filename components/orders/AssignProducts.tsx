@@ -20,7 +20,7 @@ const AssignProducts = () => {
   const [products, setProductos] = useState([]);
 
   const ContextUsed = useContext(OrderContext);
-  const { addProduct } = ContextUsed;
+  const { addProduct } = ContextUsed as any;
 
   // get from db
   const { data, loading, error } = useQuery(GET_PRODUCTS);

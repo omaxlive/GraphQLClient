@@ -14,10 +14,14 @@ const initialState = {
   total: 0,
 };
 
-const OrderContext = createContext<{
-  state: InitialStateType;
-  dispatch: React.Dispatch<unknown>;
-}>({
+// const OrderContext = createContext<{
+//   state: InitialStateType;
+//   dispatch: React.Dispatch<unknown>;
+// }>({
+//   state: initialState,
+//   dispatch: () => null,
+// });
+const OrderContext = createContext<any>({
   state: initialState,
   dispatch: () => null,
 });

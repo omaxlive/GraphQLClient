@@ -4,7 +4,7 @@ import { OrderContext } from '../../context/orders/OrderContext';
 
 const ProductSummary = ({ product }) => {
   const ContextUsed = useContext(OrderContext);
-  const { quantityProducts, updateTotal } = ContextUsed;
+  const { quantityProducts, updateTotal } = ContextUsed as any;
 
   const [quantity, setQuantity] = useState(0);
 
@@ -31,7 +31,7 @@ const ProductSummary = ({ product }) => {
         type="number"
         placeholder="Quantity"
         className="shadow apperance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline md:ml-4"
-        onChange={(e) => setQuantity(e.target.value)}
+        onChange={(e) => setQuantity(Number(e.target.value))}
         value={quantity}
       />
     </div>

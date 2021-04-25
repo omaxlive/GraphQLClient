@@ -1,9 +1,6 @@
 import { SELECT_CUSTOMER, SELECT_PRODUCT, QUANTITY_PRODUCTS, UPDATE_TOTAL } from '../../types';
 
 export const OrderReducer = (state, action) => {
-  console.log('AAA state: ', state);
-  console.log('AAA action: ', action);
-
   switch (action.type) {
     case SELECT_CUSTOMER:
       return {

@@ -4,7 +4,7 @@ import { OrderContext } from '../../context/orders/OrderContext';
 
 const Total = () => {
   const ContextUsed = useContext(OrderContext);
-  const { total } = ContextUsed;
+  const { total } = ContextUsed as any;
 
   return (
     <div className="flex items-center mt-5 justify-between bg-white p-3 ">

@@ -23,7 +23,7 @@ const GET_CUSTOMERS_SELLER = gql`
 `;
 
 export interface CustomerProps {
-  customer?: { id?: unknown; name?: string; lastName?: string; company?: string; email?: string };
+  customer?: { id?: number; name?: string; lastName?: string; company?: string; email?: string };
 }
 
 export const Customer: FC<CustomerProps> = ({ customer }) => {

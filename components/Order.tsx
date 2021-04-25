@@ -106,7 +106,7 @@ const Order = ({ order }) => {
             },
           });
 
-          Swal.fire('Deleted', data.deleteOrder, 'success');
+          Swal.fire('Deleted', 'data.deleteOrder', 'success');
         } catch (error) {
           console.log(error);
         }

@@ -20,7 +20,7 @@ const assignCustomer = () => {
   const [customer, setCustomer] = useState([]);
 
   const orderContext = useContext(OrderContext);
-  const { addCustomer } = orderContext;
+  const { addCustomer } = orderContext as any;
 
   // get from DB
   const { data, loading, error } = useQuery(GET_CUSTOMERS_SELLER);
