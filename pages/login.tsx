@@ -2,7 +2,6 @@ import { FC, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { gql, useMutation } from '@apollo/client';
-import { useRouter } from 'next/router';
 import { Layout } from '../layout/layout';
 
 const AUTH_USER = gql`
@@ -16,7 +15,6 @@ const AUTH_USER = gql`
 const Login: FC = () => {
   const [message, saveMessage] = useState(null);
   const [authUser] = useMutation(AUTH_USER);
-  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -34,15 +32,10 @@ const Login: FC = () => {
       try {
         const { data } = await authUser({ variables: { input: values } });
         // Save token in localstorage
-        setTimeout(() => {
-          const { token } = data.authUser;
-          localStorage.setItem('token', token);
-        }, 1000);
-
+        const { token } = data.authUser;
+        localStorage.setItem('token', token);
         // Redirect tp customers
-        setTimeout(() => {
-          router.push('/');
-        }, 2000);
+        window.location.href = '/';
       } catch (error) {
         saveMessage(error.message);
         console.log('Error: ', error);

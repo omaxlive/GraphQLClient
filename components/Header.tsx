@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { useRouter } from 'next/router';
 
-const OBTENER_USUARIO = gql`
+const GET_USER = gql`
   query getUser {
     getUser {
       id
@@ -17,7 +17,7 @@ export const Header = () => {
   const router = useRouter();
 
   // query apollo
-  const { data, loading, error } = useQuery(OBTENER_USUARIO);
+  const { data, loading, error } = useQuery(GET_USER);
 
   console.log('Header: ', data);
   console.log('Header: ', loading);

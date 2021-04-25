@@ -22,6 +22,7 @@ const authLink: ApolloLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
+  ssrMode: typeof window === 'undefined', // set to true for SSR
   connectToDevTools: true,
   cache: new InMemoryCache(),
   link: authLink.concat(httpLink),
