@@ -2,8 +2,9 @@ import { ApolloClient, ApolloLink, createHttpLink, InMemoryCache } from '@apollo
 import fetch from 'node-fetch';
 import { setContext } from '@apollo/client/link/context';
 
+// NOTE: for development is 'http://localhost:4000/'
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/',
+  uri: 'https://quiet-falls-86844.herokuapp.com/',
   fetch,
 });
 
@@ -13,7 +14,6 @@ const authLink: ApolloLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      myHeader: 'hello',
       authorization: token ? `Bearer ${token}` : '',
     },
     onError: null,
