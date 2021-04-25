@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { gql, useQuery } from '@apollo/client';
-import Order from '../components/Order';
-import { Layout } from '../layout/layout';
+import Order from '../../components/Order';
+import { Layout } from '../../layout/layout';
 
 const GET_ORDERS_SELLER = gql`
   query getOrdersSeller {
@@ -26,7 +26,7 @@ const GET_ORDERS_SELLER = gql`
   }
 `;
 
-const Pedidos = () => {
+const Orders = () => {
   const { data, loading, error } = useQuery(GET_ORDERS_SELLER);
 
   if (loading) return 'Loading...';
@@ -38,7 +38,7 @@ const Pedidos = () => {
       <Layout>
         <h1 className="text-2xl text-gray-800 font-light">Orders</h1>
 
-        <Link href="/neworder">
+        <Link href="/orders/neworder">
           <a className="bg-blue-800 py-2 px-5 mt-3 inline-block text-white rounded text-sm hover:bg-gray-800 mb-3 uppercase font-bold">
             New Order
           </a>
@@ -54,4 +54,4 @@ const Pedidos = () => {
   );
 };
 
-export default Pedidos;
+export default Orders;

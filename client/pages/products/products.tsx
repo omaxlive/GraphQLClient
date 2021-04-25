@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import Link from 'next/link';
-import Product from '../components/Product';
-import { Layout } from '../layout/layout';
+import Product from '../../components/Product';
+import { Layout } from '../../layout/layout';
 
 const GET_PRODUCTS = gql`
   query getProducts {
@@ -14,7 +14,7 @@ const GET_PRODUCTS = gql`
   }
 `;
 
-const Productos = () => {
+const Products = () => {
   const { data, loading, error } = useQuery(GET_PRODUCTS);
 
   console.log(data);
@@ -28,7 +28,7 @@ const Productos = () => {
       <Layout>
         <h1 className="text-2xl text-gray-800 font-light">Products</h1>
 
-        <Link href="/newproduct">
+        <Link href="/products/newproduct">
           <a className="bg-blue-800 py-2 px-5 mt-3 inline-block text-white hover:bg-gray-800 hover:text-gray-200 mb-3 rounded uppercase font-bold text-sm">
             New Product
           </a>
@@ -56,4 +56,4 @@ const Productos = () => {
   );
 };
 
-export default Productos;
+export default Products;

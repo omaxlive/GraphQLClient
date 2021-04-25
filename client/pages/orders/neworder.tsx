@@ -3,13 +3,13 @@ import React, { useContext, useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import Swal from 'sweetalert2';
-import { Layout } from '../layout/layout';
-import AsignarCliente from '../components/orders/AssignCustomer';
-import AssignProducts from '../components/orders/AssignProducts';
-import OrderSummary from '../components/orders/OrderSummary';
-import Total from '../components/orders/Total';
+import { Layout } from '../../layout/layout';
+import AsignarCliente from '../../components/orders/AssignCustomer';
+import AssignProducts from '../../components/orders/AssignProducts';
+import OrderSummary from '../../components/orders/OrderSummary';
+import Total from '../../components/orders/Total';
 
-import { OrderContext } from '../context/orders/OrderContext';
+import { OrderContext } from '../../context/orders/OrderContext';
 
 const NEW_ORDER = gql`
   mutation newOrder($input: OrderInput) {

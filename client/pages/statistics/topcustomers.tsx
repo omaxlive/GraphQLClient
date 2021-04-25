@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { gql, useQuery } from '@apollo/client';
-import { Layout } from '../layout/layout';
+import { Layout } from '../../layout/layout';
 
 const MEJORES_CLIENTES = gql`
   query topCustomers {

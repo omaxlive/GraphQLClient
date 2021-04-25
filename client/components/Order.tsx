@@ -43,7 +43,7 @@ const Order = ({ order }) => {
       cache.writeQuery({
         query: GET_ORDERS_SELLER,
         data: {
-          getOrdersSeller: getOrdersSeller.filter((order) => order.id !== id),
+          getOrdersSeller: getOrdersSeller.filter((item) => item.id !== id),
         },
       });
     },

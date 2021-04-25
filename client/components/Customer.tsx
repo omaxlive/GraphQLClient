@@ -77,7 +77,7 @@ export const Customer: FC<CustomerProps> = ({ customer }) => {
 
   const editCustomer = () => {
     Router.push({
-      pathname: '/editcustomer/[id]',
+      pathname: '/customers/editcustomer/[id]',
       query: { id },
     });
   };

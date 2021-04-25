@@ -34,12 +34,12 @@ export const Menu: FC = () => {
       </div>
       <nav className="mt-5 list-none">
         <li className={router.pathname === '/topsellers' ? 'bg-blue-800 p-2' : 'p-2'}>
-          <Link href="/topsellers">
+          <Link href="/statistics/topsellers">
             <a className="text-white block">Top Sellers</a>
           </Link>
         </li>
         <li className={router.pathname === '/topcustomers' ? 'bg-blue-800 p-2' : 'p-2'}>
-          <Link href="/topcustomers">
+          <Link href="/statistics/topcustomers">
             <a className="text-white block">Top Customers</a>
           </Link>
         </li>

@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { Layout } from '../layout/layout';
+import { Layout } from '../../layout/layout';
 
 const NEW_CUSTOMER = gql`
   mutation newCustomer($input: CustomerInput) {

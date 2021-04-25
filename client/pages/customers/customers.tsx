@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Layout } from '../layout/layout';
+import { Layout } from '../../layout/layout';
 
 const Posts: FC = () => {
   return (

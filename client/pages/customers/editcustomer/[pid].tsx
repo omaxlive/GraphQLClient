@@ -5,7 +5,7 @@ import { useQuery, gql, useMutation } from '@apollo/client';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Swal from 'sweetalert2';
-import { Layout } from '../../layout/layout';
+import { Layout } from '../../../layout/layout';
 
 const GET_CUSTOMER = gql`
   query getCustomer($id: ID!) {

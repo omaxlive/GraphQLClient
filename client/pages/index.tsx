@@ -2,7 +2,6 @@
 import { FC } from 'react';
 // import styles from "../styles/Home.module.css";
 import { gql, useQuery } from '@apollo/client';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Layout } from '../layout/layout';
 import { Customer } from '../components/Customer';
@@ -20,27 +19,19 @@ const GET_CUSTOMERS_SELLER = gql`
 `;
 
 const Home: FC = () => {
-  const router = useRouter();
-
-  // Consulta de Apollo
   const { data, loading, error } = useQuery(GET_CUSTOMERS_SELLER);
 
   console.log('home data: ', data);
   console.log('home loading: ', loading);
   console.log('home error: ', error);
 
-  // if (loading) return 'Loading....';
   if (loading) return null;
-
-  if (!data.getCustomersSeller) {
-    // router.push('/login');
-  }
 
   return (
     <Layout>
       <>
         <h1 className="text-2xl text-gray-800 font-light">Home (index)</h1>
-        <Link href="/newcustomer">
+        <Link href="/customers/newcustomer">
           <a className="bg-blue-800 py-2 px-5 mt-3 inline-block text-white rounded text-sm hover:bg-gray-800 mb-3 uppercase font-bold w-full lg:w-auto text-center">
             New Customer
           </a>
