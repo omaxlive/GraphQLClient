@@ -92,7 +92,7 @@ const NewOrder = () => {
       console.log(data);
 
       // Redirect
-      router.push('/pedidos');
+      router.push('/orders');
 
       Swal.fire('Created', 'The Order was successfully created', 'success');
     } catch (error) {

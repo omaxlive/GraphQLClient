@@ -75,7 +75,7 @@ const NewProduct = () => {
         });
         console.log(data);
         Swal.fire('Created', 'The product was successfully created', 'success');
-        router.push('/productos');
+        router.push('/products');
       } catch (error) {
         console.log(error);
       }
