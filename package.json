@@ -1,0 +1,46 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint:ts": "eslint . --ext .ts,.tsx"
+  },
+  "dependencies": {
+    "@apollo/client": "3.3.11",
+    "apollo-link-context": "^1.0.20",
+    "formik": "2.2.6",
+    "graphql": "15.5.0",
+    "next": "10.0.6",
+    "node-fetch": "2.6.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-select": "^4.3.0",
+    "recharts": "^1.8.5",
+    "sweetalert2": "^10.16.0",
+    "yup": "^0.32.8"
+  },
+  "devDependencies": {
+    "@types/node": "14.14.28",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
+    "eslint": "7.19.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript-prettier": "^4.1.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "prettier": "2.2.1",
+    "stylelint": "13.9.0",
+    "stylelint-config-standard": "20.0.0",
+    "stylelint-order": "4.1.0",
+    "stylelint-scss": "^3.19.0",
+    "typescript": "4.1.5"
+  }
+}
