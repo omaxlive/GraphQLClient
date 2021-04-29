@@ -1,7 +1,9 @@
 import { gql, useQuery } from '@apollo/client';
 import Link from 'next/link';
+import { GetServerSideProps } from 'next';
 import Product from '../../components/Product';
 import { Layout } from '../../layout/layout';
+import { addApolloState, initializeApollo } from '../../config/apollo';
 
 const GET_PRODUCTS = gql`
   query getProducts {
@@ -14,14 +16,8 @@ const GET_PRODUCTS = gql`
   }
 `;
 
-const Products = () => {
-  const { data, loading, error } = useQuery(GET_PRODUCTS);
-
-  console.log(data);
-  console.log(loading);
-  console.log(error);
-
-  if (loading) return 'Loading...';
+const Products = ({ data }) => {
+  console.log('data: ', data);
 
   return (
     <div>
@@ -54,6 +50,18 @@ const Products = () => {
       </Layout>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const apolloClient = initializeApollo();
+
+  const { data } = await apolloClient.query({
+    query: GET_PRODUCTS,
+  });
+
+  return addApolloState(apolloClient, {
+    props: { data },
+  });
 };
 
 export default Products;
